@@ -11,7 +11,6 @@ function Game (player1, player2, dice) {
 function Player (scoreTotal, scoreTemp) {
   this.scoreTotal = scoreTotal;
   this.scoreTemp = scoreTemp;
-  this.scoreWin = scoreTotal + scoreTemp;
 }
 
 Player.prototype.play = function(dice) {
@@ -46,11 +45,31 @@ function showInfo(totalScore1, totalScore2, turnScore1, turnScore2, diceSide) {
   $("div#diceResult").text(diceSide);
 }
 
-function gameStop(total1, total2) {
+function buttonRollDice (btnPlay1, btnPlay2, btnHold, player, dice) {
+  player.play(dice);
+  if (dice.side === 1) {
+    $(btnPlay1).hide();
+    $(btnHold).hide();
+    $(btnPlay2).show();
+  } else {
+    $(btnHold).show();
+  }
+}
+
+function buttonHold (btnPlay1, btnPlay2, btnHold, player) {
+  player.hold();
+  player.scoreTemp = 0;
+  $(btnPlay1).hide();
+  $(btnHold).hide();
+  $(btnPlay2).show();
+}
+
+
+function gameStop(total1, total2, player1, player2) {
   if (total1 >= 20) {
-    $("div.row").replaceWith("<p class='win'> Player 1 Wins!!! </p>" + "<p>");
+    $("div.row").replaceWith("<p class='win'> Player 1 Wins!!! </p>" + "<p>Player1 Score: " + total1 + "</p><p>Player2 Score: " + player2.scoreTotal + "</p>");
   } else if (total2 >= 20) {
-    $("div.row").replaceWith("<p class='win'> Player 2 Wins!!! </p>");
+    $("div.row").replaceWith("<p class='win'> Player 2 Wins!!! </p>" + "<p>Player1 Score: " + player1.scoreTotal + "</p><p>Player2 Score: " + total2 + "</p>");
   }
 }
 
@@ -60,90 +79,25 @@ $(document).ready(function(){
   let player2 = new Player(0, 0);
   let scoreWin1;
   let scoreWin2;
+
   $("button#play1").click(function(){
-    player1.play(dice);
-    if (dice.side === 1) {
-      $("button#play1").hide();
-      $("button#hold1").hide();
-      $("button#play2").show();
-    } else {
-      $("button#hold1").show();
-    }
-    showInfo(player1.scoreTotal, player2.scoreTotal, player1.scoreTemp, player2.scoreTemp, dice.side);
-    // gameStop(player1.scoreTotal + player1.scoreTemp, player2.scoreTotal + player2.scoreTemp);
+    buttonRollDice ("#play1", "#play2", "#hold1", player1, dice);
     scoreWin1 = player1.scoreTotal + player1.scoreTemp;
-    gameStop(scoreWin1, scoreWin2);
+    showInfo(player1.scoreTotal, player2.scoreTotal, player1.scoreTemp, player2.scoreTemp, dice.side);
+    gameStop(scoreWin1, scoreWin2, player1, player2);
   });
   $("button#play2").click(function(){
-    player2.play(dice);
-    if (dice.side === 1) {
-      $("button#play2").hide();
-      $("button#hold2").hide();
-      $("button#play1").show();
-    } else {
-      $("button#hold2").show();
-    }
-    showInfo(player1.scoreTotal, player2.scoreTotal, player1.scoreTemp, player2.scoreTemp, dice.side);
-    //gameStop(player1.scoreTotal + player1.scoreTemp, player2.scoreTotal + player2.scoreTemp);
+    buttonRollDice ("#play2", "#play1", "#hold2", player2, dice);
     scoreWin2 = player2.scoreTotal + player2.scoreTemp;
-    gameStop(scoreWin1, scoreWin2);
+    showInfo(player1.scoreTotal, player2.scoreTotal, player1.scoreTemp, player2.scoreTemp, dice.side);
+    gameStop(scoreWin1, scoreWin2, player1, player2);
   });
   $("button#hold1").click(function(){
-    player1.hold();
-    player1.scoreTemp = 0;
-    $("button#play1").hide();
-    $("button#hold1").hide();
-    $("button#play2").show();
+    buttonHold("#play1", "#play2", "#hold1", player1);
     showInfo(player1.scoreTotal, player2.scoreTotal, player1.scoreTemp, player2.scoreTemp, dice.side);
   });
   $("button#hold2").click(function(){
-    player2.hold();
-    player2.scoreTemp = 0;
-    $("button#play2").hide();
-    $("button#hold2").hide();
-    $("button#play1").show();
+    buttonHold("#play2", "#play1", "#hold2", player2);
     showInfo(player1.scoreTotal, player2.scoreTotal, player1.scoreTemp, player2.scoreTemp, dice.side);
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let diceGame = new Dice();
-
-// let player1Game = new Player(0, 0);
-// let player2Game = new Player(0, 0);
-
-// let game = new Game(player1Game, player2Game, diceGame);
-
-// player1Game.play(diceGame);
-// console.log("Dice side we get: " + diceGame.side);
-// console.log("Total score: " + player1Game.scoreTotal);
-// console.log("Temp score: " + player1Game.scoreTemp);
-
-// player1Game.play(diceGame);
-// console.log("Dice side we get: " + diceGame.side);
-// console.log("Total score: " + player1Game.scoreTotal);
-// console.log("Temp score: " + player1Game.scoreTemp);
-
-// player1Game.play(diceGame);
-// console.log("Dice side we get: " + diceGame.side);
-// console.log("Total score: " + player1Game.scoreTotal);
-// console.log("Temp score: " + player1Game.scoreTemp);
-
-// player1Game.hold();
-// console.log("Total score: " + player1Game.scoreTotal);
-

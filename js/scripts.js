@@ -11,6 +11,7 @@ function Game (player1, player2, dice) {
 function Player (scoreTotal, scoreTemp) {
   this.scoreTotal = scoreTotal;
   this.scoreTemp = scoreTemp;
+  this.scoreWin = scoreTotal + scoreTemp;
 }
 
 Player.prototype.play = function(dice) {
@@ -45,10 +46,20 @@ function showInfo(totalScore1, totalScore2, turnScore1, turnScore2, diceSide) {
   $("div#diceResult").text(diceSide);
 }
 
+function gameStop(total1, total2) {
+  if (total1 >= 20) {
+    $("div.row").replaceWith("<p class='win'> Player 1 Wins!!! </p>" + "<p>");
+  } else if (total2 >= 20) {
+    $("div.row").replaceWith("<p class='win'> Player 2 Wins!!! </p>");
+  }
+}
+
 $(document).ready(function(){
   let dice = new Dice();
   let player1 = new Player(0, 0);
   let player2 = new Player(0, 0);
+  let scoreWin1;
+  let scoreWin2;
   $("button#play1").click(function(){
     player1.play(dice);
     if (dice.side === 1) {
@@ -59,6 +70,9 @@ $(document).ready(function(){
       $("button#hold1").show();
     }
     showInfo(player1.scoreTotal, player2.scoreTotal, player1.scoreTemp, player2.scoreTemp, dice.side);
+    // gameStop(player1.scoreTotal + player1.scoreTemp, player2.scoreTotal + player2.scoreTemp);
+    scoreWin1 = player1.scoreTotal + player1.scoreTemp;
+    gameStop(scoreWin1, scoreWin2);
   });
   $("button#play2").click(function(){
     player2.play(dice);
@@ -70,6 +84,9 @@ $(document).ready(function(){
       $("button#hold2").show();
     }
     showInfo(player1.scoreTotal, player2.scoreTotal, player1.scoreTemp, player2.scoreTemp, dice.side);
+    //gameStop(player1.scoreTotal + player1.scoreTemp, player2.scoreTotal + player2.scoreTemp);
+    scoreWin2 = player2.scoreTotal + player2.scoreTemp;
+    gameStop(scoreWin1, scoreWin2);
   });
   $("button#hold1").click(function(){
     player1.hold();

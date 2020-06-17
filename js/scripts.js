@@ -17,7 +17,6 @@ Player.prototype.play = function(dice) {
   dice.roll();
   if(dice.side === 1) {
     this.scoreTemp = 0;
-    this.hold();
   } else {
     this.scoreTemp += dice.side;
   }
@@ -25,7 +24,6 @@ Player.prototype.play = function(dice) {
 
 Player.prototype.hold = function () {
   this.scoreTotal += this.scoreTemp;
-  return true;
 }
 
 // Business Logic for Dice
@@ -39,9 +37,56 @@ Dice.prototype.roll = function() {
 }
 
 // User Interface
+function showInfo(totalScore1, totalScore2, turnScore1, turnScore2, diceSide) {
+  $("div#total-score-1").text(totalScore1);
+  $("div#total-score-2").text(totalScore2);
+  $("div#turn-score-1").text(turnScore1);
+  $("div#turn-score-2").text(turnScore2);
+  $("div#diceResult").text(diceSide);
+}
 
 $(document).ready(function(){
-  
+  let dice = new Dice();
+  let player1 = new Player(0, 0);
+  let player2 = new Player(0, 0);
+  $("button#play1").click(function(){
+    player1.play(dice);
+    if (dice.side === 1) {
+      $("button#play1").hide();
+      $("button#hold1").hide();
+      $("button#play2").show();
+    } else {
+      $("button#hold1").show();
+    }
+    showInfo(player1.scoreTotal, player2.scoreTotal, player1.scoreTemp, player2.scoreTemp, dice.side);
+  });
+  $("button#play2").click(function(){
+    player2.play(dice);
+    if (dice.side === 1) {
+      $("button#play2").hide();
+      $("button#hold2").hide();
+      $("button#play1").show();
+    } else {
+      $("button#hold2").show();
+    }
+    showInfo(player1.scoreTotal, player2.scoreTotal, player1.scoreTemp, player2.scoreTemp, dice.side);
+  });
+  $("button#hold1").click(function(){
+    player1.hold();
+    player1.scoreTemp = 0;
+    $("button#play1").hide();
+    $("button#hold1").hide();
+    $("button#play2").show();
+    showInfo(player1.scoreTotal, player2.scoreTotal, player1.scoreTemp, player2.scoreTemp, dice.side);
+  });
+  $("button#hold2").click(function(){
+    player2.hold();
+    player2.scoreTemp = 0;
+    $("button#play2").hide();
+    $("button#hold2").hide();
+    $("button#play1").show();
+    showInfo(player1.scoreTotal, player2.scoreTotal, player1.scoreTemp, player2.scoreTemp, dice.side);
+  });
 });
 
 

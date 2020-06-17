@@ -1,4 +1,10 @@
-#total-score-1, #diceResult, #total-score-2 {
+#total-score-1, #diceResult, #total-score-2, #turn-score-1, #turn-score-2{
   width: 200px;
   height: 200px;
+  font-size: 50px;
 }
+
+#hold1, #hold2, #play2 {
+  display: none;
+}
+

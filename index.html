@@ -5,11 +5,31 @@
   <link href="css/styles.css" rel="stylesheet" type="text/css">
   <script src="js/jquery-3.5.1.js"></script>
   <script src="js/scripts.js"></script>
-  <title>Document</title>
+  <title>Pig Dice Game</title>
 </head>
 <body>
   <div class="container">
-
+    <h1>Pig Dice Game</h1>
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Player 1</h3>
+        <p>Score:</p>
+        <div id="total-score-1"></div>
+        <button type="button" id="play1" class="btn">Roll Dice</button>
+        <button type="button" id="hold1" class="btn">Hold</button>
+      </div>
+      <div class="col-md-4">
+        <h3>Dice</h3>
+        <div id="diceResult"></div>
+      </div>
+      <div class="col-md-4">
+        <h3>Player 2</h3>
+        <p>Score:</p>
+        <div id="total-score-2"></div>
+        <button type="button" id="play2" class="btn">Roll Dice</button>
+        <button type="button" id="hold2" class="btn">Hold</button>
+      </div>
+    </div>
   </div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 #total-score-1, #diceResult, #total-score-2, #turn-score-1, #turn-score-2{
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   font-size: 50px;
 }
 
@@ -8,3 +8,17 @@
   display: none;
 }
 
+body{
+  background-color: #ffe6ff;
+}
+
+h1{
+  margin: 0px;
+  padding: 30px;
+  background-color: pink;
+  text-align: center;
+}
+
+.column {
+  border: 1px solid black;
+}

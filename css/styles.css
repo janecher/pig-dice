@@ -1,4 +1,8 @@
-#total-score-1, #diceResult, #total-score-2, #turn-score-1, #turn-score-2{
+body {
+  text-align: center;
+}
+
+#total-score-1, #dice1, #dice2, #total-score-2, #turn-score-1, #turn-score-2{
   width: 100px;
   height: 100px;
   font-size: 50px;

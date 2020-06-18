@@ -32,6 +32,7 @@ Dice.prototype.roll = function() {
 
 function computerPlay (player) {
 
+
 }
 
 function showInfo(totalScore1, totalScore2, turnScore1, turnScore2, diceSide1, diceSide2) {
@@ -39,24 +40,24 @@ function showInfo(totalScore1, totalScore2, turnScore1, turnScore2, diceSide1, d
   $("div#total-score-2").text(totalScore2);
   $("div#turn-score-1").text(turnScore1);
   $("div#turn-score-2").text(turnScore2);
-  $("div#dice1").css("background-image", "url('one.jpeg')");
-  $("div#dice2").css("background-image", chooseDiceImage(diceSide2));
+  $("div#dice1").html(chooseDiceImage(diceSide1));
+  $("div#dice2").html(chooseDiceImage(diceSide2));
 }
 
 function chooseDiceImage (side) {
   switch (side) {
     case (1):
-      return "url('one.jpeg')";
+      return '<div class="first-face"><span class="pip"></span></div>';
     case (2):
-      return "url('two.jpeg')";
+      return '<div class="second-face"><span class="pip"></span><span class="pip"></span></div>';
     case (3):
-      return "url('three.jpeg')";
+      return '<div class="third-face"><span class="pip"></span><span class="pip"></span><span class="pip"></span></div>';
     case (4):
-      return "url('four.jpeg')";
+      return '<div class="fourth-face"><div class="column"><span class="pip"></span><span class="pip"></span></div><div class="column"><span class="pip"></span><span class="pip"></span></div></div>';
     case (5):
-      return "url('five.jpeg')";
+      return '<div class="fifth-face"><div class="column"><span class="pip"></span><span class="pip"></span></div><div class="column"><span class="pip"></span></div><div class="column"><span class="pip"></span><span class="pip"></span></div></div>';
     case (6):
-      return "url('six.jpeg)";   
+      return '<div class="sixth-face"><div class="column"><span class="pip"></span><span class="pip"></span><span class="pip"></span></div><div class="column"><span class="pip"></span><span class="pip"></span><span class="pip"></span></div></div>';   
   }
 }
 
@@ -64,6 +65,7 @@ function buttonRollDice (btnPlay1, btnPlay2, btnHold, player, dice1, dice2) {
   player.play(dice1);
   player.play(dice2);
   if (dice1.side === 1 || dice2.side === 1) {
+    player.scoreTemp = 0;
     $(btnPlay1).hide();
     $(btnHold).hide();
     $(btnPlay2).show();
@@ -82,10 +84,10 @@ function buttonHold (btnPlay1, btnPlay2, btnHold, player) {
 
 function gameStop(total1, total2, player1, player2) {
   if (total1 >= 20) {
-    $("div.row").html("<p class='win'> Player 1 Wins!!! </p>" + "<p>Player1 Score: " + total1 + "</p><p>Player2 Score: " + player2.scoreTotal + "</p>"
+    $("div.row").html("<p class='win'> Player 1 Wins!!! </p>" + "<p class='result'>Player 1 Score: <strong>" + total1 + "</strong></p><p class='result'>Player 2 Score: <strong>" + player2.scoreTotal + "</strong></p>"
     + "<button id='reset' class='btn'>Start new Game</button>");
   } else if (total2 >= 20) {
-    $("div.row").html("<p class='win'> Player 2 Wins!!! </p>" + "<p>Player1 Score: " + player1.scoreTotal + "</p><p>Player2 Score: " + total2 + "</p>"
+    $("div.row").html("<p class='win'> Player 2 Wins!!! </p>" + "<p class='result'>Player 1 Score: <strong>" + player1.scoreTotal + "</strong></p><p class='result'>Player 2 Score: <strong>" + total2 + "</strong></p>"
     + "<button id='reset' class='btn'>Start new Game</button>");
   }
 }

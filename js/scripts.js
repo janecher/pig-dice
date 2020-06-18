@@ -1,12 +1,3 @@
-// Business Logic for Game
-
-function Game (player1, player2, dice1, dice2) {
-  this.player1 = player1;
-  this.player2 = player2;
-  this.dice1 = dice1;
-  this.dice2 = dice2;
-}
-
 // Business Logic for Player
 
 function Player (scoreTotal, scoreTemp) {
@@ -38,29 +29,34 @@ Dice.prototype.roll = function() {
 }
 
 // User Interface
+
+function computerPlay (player) {
+
+}
+
 function showInfo(totalScore1, totalScore2, turnScore1, turnScore2, diceSide1, diceSide2) {
   $("div#total-score-1").text(totalScore1);
   $("div#total-score-2").text(totalScore2);
   $("div#turn-score-1").text(turnScore1);
   $("div#turn-score-2").text(turnScore2);
-  $("div#dice1").text(diceSide1);
-  $("div#dice2").text(diceSide2);
+  $("div#dice1").css("background-image", "url('one.jpeg')");
+  $("div#dice2").css("background-image", chooseDiceImage(diceSide2));
 }
 
 function chooseDiceImage (side) {
   switch (side) {
     case (1):
-      return "<img src='one.jpeg'>";
+      return "url('one.jpeg')";
     case (2):
-      return "<img src='two.jpeg'>";
+      return "url('two.jpeg')";
     case (3):
-      return "<img src='three.jpeg'>";
+      return "url('three.jpeg')";
     case (4):
-      return "<img src='four.jpeg'>";
+      return "url('four.jpeg')";
     case (5):
-      return "<img src='five.jpeg'>";
+      return "url('five.jpeg')";
     case (6):
-      return "<img src='six.jpeg'>";   
+      return "url('six.jpeg)";   
   }
 }
 
@@ -84,7 +80,6 @@ function buttonHold (btnPlay1, btnPlay2, btnHold, player) {
   $(btnPlay2).show();
 }
 
-
 function gameStop(total1, total2, player1, player2) {
   if (total1 >= 20) {
     $("div.row").html("<p class='win'> Player 1 Wins!!! </p>" + "<p>Player1 Score: " + total1 + "</p><p>Player2 Score: " + player2.scoreTotal + "</p>"
@@ -107,7 +102,6 @@ $(document).ready(function(){
   let dice2 = new Dice();
   let player1 = new Player(0, 0);
   let player2 = new Player(0, 0);
-  let game = new Game(player1, player2, dice1, dice2);
   let scoreWin1;
   let scoreWin2;
 
@@ -129,6 +123,13 @@ $(document).ready(function(){
   });
   $("button#hold2").click(function(){
     buttonHold("#play2", "#play1", "#hold2", player2);
+    showInfo(player1.scoreTotal, player2.scoreTotal, player1.scoreTemp, player2.scoreTemp, dice1.side, dice2.side);
+  });
+  $("#start").click(function(){
+    $("#wrapper").prepend("<button id='reset' class='btn'>Reset Game</button>");
+    $("#start").hide();
+    $(".row").show();
+    $(".rules").hide();
     showInfo(player1.scoreTotal, player2.scoreTotal, player1.scoreTemp, player2.scoreTemp, dice1.side, dice2.side);
   });
 });

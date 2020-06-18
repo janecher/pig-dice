@@ -1,5 +1,26 @@
 body {
   text-align: center;
+  background-color: #ffe6ff;
+}
+
+.row{
+  display: none;
+}
+
+h3 {
+  margin-bottom: 40px;
+}
+
+#wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.rules {
+  margin-top: 20px;
+  font-size: 18px;
+  margin-right: 20%;
+  margin-left: 20%;
 }
 
 #total-score-1, #dice1, #dice2, #total-score-2, #turn-score-1, #turn-score-2{
@@ -14,21 +35,11 @@ body {
   display: none;
 }
 
-body{
-  background-color: #ffe6ff;
-}
-
 h1{
   margin: 0px;
   padding: 30px;
   background-color: pink;
   text-align: center;
-}
-
-button {
-  margin-top: 10px;
-  background-color: pink;
-  font-weight: bold;
 }
 
 .btn{
@@ -40,5 +51,9 @@ button {
 
 .win{
   font-size: 50px;
+  margin-top: 30px;
+}
+
+.column {
   margin-top: 30px;
 }

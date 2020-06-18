@@ -9,8 +9,15 @@
 </head>
 <body>
   <h1>Pig Dice Game</h1>
-  <div class="container">
+  <div class="container"> 
+    <div class="rules">
+      <h2>How to Play:</h2>
+      <p>Take turns rolling dice. The goal of the game is to reach 100 points before your opponent. 
+      If you roll a "1" your turn is over. If you choose to "hold" the added total of the turn score will be added to your total score and your turn will end.</p>
+    </div>  
+    <button type="button" id="start" class="btn">Start New Game</button>  
     <div class="row">
+      <div id="wrapper"></div>
       <div class="col-md-4 column">
         <h3>Player 1</h3>
         <p>Total Score:</p>
@@ -26,7 +33,6 @@
         <div id="dice1" class="show"></div>
         <p>Dice 2</p>
         <div id="dice2" class="show"></div>
-        <button type="button" id="reset" class="btn">Reset</button>
       </div>
       <div class="col-md-4 column">
         <h3>Player 2</h3>

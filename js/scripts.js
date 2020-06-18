@@ -1,9 +1,10 @@
 // Business Logic for Game
 
-function Game (player1, player2, dice) {
+function Game (player1, player2, dice1, dice2) {
   this.player1 = player1;
   this.player2 = player2;
-  this.dice = dice;
+  this.dice1 = dice1;
+  this.dice2 = dice2;
 }
 
 // Business Logic for Player
@@ -86,17 +87,27 @@ function buttonHold (btnPlay1, btnPlay2, btnHold, player) {
 
 function gameStop(total1, total2, player1, player2) {
   if (total1 >= 20) {
-    $("div.row").replaceWith("<p class='win'> Player 1 Wins!!! </p>" + "<p>Player1 Score: " + total1 + "</p><p>Player2 Score: " + player2.scoreTotal + "</p>");
+    $("div.row").html("<p class='win'> Player 1 Wins!!! </p>" + "<p>Player1 Score: " + total1 + "</p><p>Player2 Score: " + player2.scoreTotal + "</p>"
+    + "<button id='reset' class='btn'>Start new Game</button>");
   } else if (total2 >= 20) {
-    $("div.row").replaceWith("<p class='win'> Player 2 Wins!!! </p>" + "<p>Player1 Score: " + player1.scoreTotal + "</p><p>Player2 Score: " + total2 + "</p>");
+    $("div.row").html("<p class='win'> Player 2 Wins!!! </p>" + "<p>Player1 Score: " + player1.scoreTotal + "</p><p>Player2 Score: " + total2 + "</p>"
+    + "<button id='reset' class='btn'>Start new Game</button>");
   }
 }
 
+function attachButtonStart () {
+  $("div.row").on("click", "#reset", function() {
+    location.reload();
+  });
+};
+
 $(document).ready(function(){
+  attachButtonStart();
   let dice1 = new Dice();
   let dice2 = new Dice();
   let player1 = new Player(0, 0);
   let player2 = new Player(0, 0);
+  let game = new Game(player1, player2, dice1, dice2);
   let scoreWin1;
   let scoreWin2;
 

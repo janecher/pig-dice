@@ -83,10 +83,10 @@ function buttonHold (btnPlay1, btnPlay2, btnHold, player) {
 }
 
 function gameStop(total1, total2, player1, player2) {
-  if (total1 >= 20) {
+  if (total1 >= 100) {
     $("div.row").html("<p class='win'> Player 1 Wins!!! </p>" + "<p class='result'>Player 1 Score: <strong>" + total1 + "</strong></p><p class='result'>Player 2 Score: <strong>" + player2.scoreTotal + "</strong></p>"
     + "<button id='reset' class='btn'>Start new Game</button>");
-  } else if (total2 >= 20) {
+  } else if (total2 >= 100) {
     $("div.row").html("<p class='win'> Player 2 Wins!!! </p>" + "<p class='result'>Player 1 Score: <strong>" + player1.scoreTotal + "</strong></p><p class='result'>Player 2 Score: <strong>" + total2 + "</strong></p>"
     + "<button id='reset' class='btn'>Start new Game</button>");
   }

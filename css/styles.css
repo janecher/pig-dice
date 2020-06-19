@@ -154,3 +154,10 @@ img {
   background-color: #333;
   box-shadow: inset 0 3px #111, inset 0 -3px #555;
 }
+
+@media-@media screen and (max-width: 480px) {
+  .rules {
+    margin-right: 5%;
+    margin-left: 5%;
+  }  
+}
